@@ -3,7 +3,7 @@
 ## Description
 This is a simple Java username and password generator that was created by OpenAI's ChatGPT (version 3.5) Large Language Model (LLM). 
 
-In this codebase, the `generateUsername` method generates a six-character username using lowercase letters, and the `generatePassword` method generates a password of a specified length containing a mix of lowercase letters, uppercase letters, digits, and special characters. You can customize the length and character sets according to your requirements. This is a basic implementation and may not be suitable for production-level security.
+In this codebase, the `generateUsername` method generates a username of a specified length containing a mix of lowercase letters, and the `generatePassword` method generates a password of a specified length containing a mix of lowercase letters, uppercase letters, digits, and special characters. You can customize the length and character sets according to your requirements. This is a basic implementation and may not be suitable for production-level security.
 
 ## Program Codebase Snippet
 Here is a snippet of the "UsernamePasswordGenerator.java" file within the codebase:
@@ -14,7 +14,7 @@ import java.util.Scanner;
 /**
  * This class demonstrates a simple username and password generator.
  */
-public class PasswordGenerator {
+public class UsernamePasswordGenerator {
 
     // Character sets for generating password
     private static final String LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
@@ -133,13 +133,12 @@ These user stories capture the motivations and goals behind using the code in va
 
 <a id="correctness"></a>
 ## Program Correctness
-let's evaluate the correctness of the code:
-
-1. **Input Handling**: The code uses a Scanner to take user input for the desired username and password lengths. It consumes the newline character after reading an integer using scanner.nextLine(), which is good practice to prevent issues when reading subsequent input. This handles user input appropriately.
-2. **Username Generation**: The generateUsername method generates a username of the specified length consisting of lowercase letters. It uses a Random object to select random characters from the lowercase alphabet. However, this method doesn't account for potential username collisions, and generated usernames might not be truly unique.
-3. **Password Generation**: The generatePassword method generates a password of the specified length using a combination of lowercase letters, uppercase letters, digits, and special characters. Similar to the username generation, this method uses a Random object for randomness.
+The analysis of the correctness of the code follows:
+1. **Input Handling**: The code uses a Scanner to take user input for the desired username and password lengths. It consumes the newline character after reading an integer using `scanner.nextLine()`, which is good practice to prevent issues when reading subsequent input. This handles user input appropriately.
+2. **Username Generation**: The `generateUsername` method generates a username of the specified length consisting of lowercase letters. It uses a `Random` object to select random characters from the lowercase alphabet. However, this method doesn't account for potential username collisions, and generated usernames might not be truly unique.
+3. **Password Generation**: The `generatePassword` method generates a password of the specified length using a combination of lowercase letters, uppercase letters, digits, and special characters. Similar to the username generation, this method uses a `Random` object for randomness.
 4. **Main Method and Interaction**: The main method interacts with the user to get desired lengths, generates the username and password, and then prints them. The user interaction and generation parts seem to work as intended.
-5. **Security Considerations**: The code uses a basic pseudorandom number generator (Random class), which may not be suitable for cryptographic purposes. For security-sensitive applications, a more secure random number generator should be used.
+5. **Security Considerations**: The code uses a basic pseudorandom number generator (`Random` class), which may not be suitable for cryptographic purposes. For security-sensitive applications, a more secure random number generator should be used.
 6. **Usability and Extensibility**: The code provides a basic example of generating usernames and passwords, but it lacks error handling for invalid inputs or edge cases. Additionally, for real-world applications, more sophisticated username generation and password complexity rules might be necessary.
 7. **JavaDocs and Comments**: The code includes comments and JavaDoc-style comments that explain the purpose of methods, parameters, and key pieces of functionality, enhancing code readability and understanding.
 8. **Overall Correctness**: The code seems generally correct for its intended basic usage. However, for production use or security-sensitive applications, further considerations, such as using a cryptographically secure random number generator and more advanced username/password generation techniques, would be needed.
@@ -157,7 +156,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * This class contains test cases for the PasswordGenerator class.
  */
-public class PasswordGeneratorTest {
+public class UsernamePasswordGeneratorTest {
 
     /**
      * Test case to verify the correctness of the generateUsername method.
@@ -203,7 +202,7 @@ In these test cases:
 ## Program (Memory and Compute) Efficiency
 The analysis of the memory and compute efficiency of the `UsernamePasswordGenerator` class code follows:
 * **Memory Efficiency**:
-  1. The code uses relatively small constant string variables (LOWERCASE, UPPERCASE, DIGITS, SPECIAL_CHARACTERS) to store character sets. These variables have constant memory usage regardless of the length of the generated password.
+  1. The code uses relatively small constant string variables (`LOWERCASE`, `UPPERCASE`, `DIGITS`, `SPECIAL_CHARACTERS`) to store character sets. These variables have constant memory usage regardless of the length of the generated password.
   2. The `generateUsername` and `generatePassword` methods use `StringBuilder` to build the username and password strings. This is memory-efficient because it avoids creating multiple intermediate string objects during string concatenation.
   3. The memory usage is primarily determined by the length of the generated username and password, which is based on user input. As long as the lengths are reasonable, memory usage should be manageable.
 * **Compute Efficiency**:
@@ -220,7 +219,7 @@ The analysis of the modularity of the `UsernamePasswordGenerator` class code fol
 2. **Single Responsibility Principle (SRP)**: The class follows the SRP by providing methods for generating usernames and passwords, and another method for interacting with the user to get input and display output. Each method focuses on a single task, promoting clear responsibilities and enhancing maintainability.
 3. **Parameterization**: The code allows users to specify the desired lengths of usernames and passwords via method parameters. This parameterization makes the code flexible and reusable, as it can generate different lengths of usernames and passwords based on input.
 4. **Loose Coupling**: The code doesn't have tight dependencies on external libraries or complex data structures. It uses standard Java libraries for input handling and random number generation, keeping dependencies minimal and allowing for easy integration into different environments.
-5. **Ease of Extension**: While the code provides a basic example of generating usernames and passwords, it can be extended with additional features or complexity requirements. For instance, you could introduce more advanced username generation techniques or password complexity rules.
+5. **Ease of Extension**: While the code provides a basic example of generating usernames and passwords, it can be extended with additional features or complexity requirements. For instance, you could introduce more advanced username-generation techniques or password complexity rules.
 6. **Code Readability**: The methods and variables are named clearly and descriptively, which enhances code readability. Additionally, the comments and JavaDoc-style comments provide documentation that aids understanding.
 
 Overall, the `UsernamePasswordGenerator` class demonstrates good modularity by effectively separating concerns, adhering to the SRP, allowing parameterization, and promoting loose coupling. These characteristics make the code more maintainable, extendable, and comprehensible. However, depending on the intended use and requirements, more advanced modularity patterns or designs might be necessary for larger and more complex systems.
@@ -240,7 +239,16 @@ Overall, while the code provides a basic example of username and password genera
 
 <a id="solid-design-principles"></a>
 ## SOLID Design Principles
-The SOLID principles are a set of design principles that help developers create more maintainable, flexible, and understandable software. Let's see how the `UsernamePasswordGenerator` class code aligns with these principles:
+The SOLID principles are a set of five design principles that were introduced to help developers create more maintainable, flexible, and understandable software systems. These principles, when followed, contribute to better software design, modularity, and extensibility. The SOLID acronym stands for the first letter of each principle:
+1. **Single Responsibility Principle (SRP)**: This principle states that a class should have only one reason to change, meaning it should have a single responsibility or purpose. In other words, a class should focus on doing one thing well and should not be burdened with multiple, unrelated responsibilities. This leads to better code organization and easier maintenance.
+2. **Open/Closed Principle (OCP)**: The Open/Closed Principle suggests that software entities (classes, modules, functions) should be open for extension but closed for modification. This means that you should be able to add new features or behaviors to a system without changing its existing code. This is typically achieved through the use of interfaces, abstract classes, and inheritance, allowing you to extend functionality through subclasses rather than modifying existing code.
+3. **Liskov Substitution Principle (LSP)**: The Liskov Substitution Principle states that objects of a derived class should be substitutable for objects of the base class without affecting the correctness of the program. In other words, if a class is a subclass of another class, it should be able to replace the parent class in any context without causing unexpected behavior. This principle ensures that inheritance relationships maintain consistency and logical behavior.
+4. **Interface Segregation Principle (ISP)**: The Interface Segregation Principle suggests that clients should not be forced to depend on interfaces they do not use. It promotes the idea of creating fine-grained, specific interfaces rather than large, monolithic ones. This helps avoid situations where clients are required to implement methods that are not relevant to their use case.
+5. **Dependency Inversion Principle (DIP)**: The Dependency Inversion Principle emphasizes that high-level modules should not depend on low-level modules, but both should depend on abstractions. This principle encourages the use of interfaces or abstract classes to decouple high-level and low-level modules, making the system more flexible and enabling easier changes to implementations without affecting clients.
+
+Following these SOLID principles can result in software that is easier to understand, maintain, and extend. They promote modular design, reduce the risk of unintended consequences when making changes, and enhance overall code quality. While strict adherence to these principles might not be necessary in all situations, understanding and applying them appropriately can significantly contribute to well-designed and robust software systems.
+
+Let's see how the `UsernamePasswordGenerator` class code aligns with these principles:
 1. **Single Responsibility Principle (SRP)**: The 'UsernamePasswordGenerator` class adheres to the SRP by having methods that handle specific tasks: generating usernames, generating passwords, and interacting with the user for input and output. Each method has a single responsibility, making the code more focused and easier to understand.
 2. **Open/Closed Principle (OCP)**: The `UsernamePasswordGenerator` class can be extended without modifying its existing code. You can add new methods, improve the username/password generation algorithms, or introduce new complexity criteria without altering the existing methods. This demonstrates compliance with the OCP.
 3. **Liskov Substitution Principle (LSP)**: While not directly applicable in this context, the LSP emphasizes that derived classes should be substitutable for their base classes without affecting program correctness. In this code, there's no inheritance involved, so this principle doesn't come into play.
@@ -251,16 +259,36 @@ Overall, the `UsernamePasswordGenerator` class demonstrates adherence to the SRP
 
 <a id="clean-architecture"></a>
 ## Program (Clean) Architecture
-Clean Architecture is a design philosophy that emphasizes the separation of concerns and the establishment of clear boundaries between different layers of an application. Let's see how the `UsernamePasswordGenerator` class code aligns with the principles of Clean Architecture:
+Clean Architecture is a software design philosophy introduced by Robert C. Martin (also known as Uncle Bob) that focuses on creating software systems that are modular, maintainable, and independent of specific technologies. The core idea behind Clean Architecture is to organize an application's components in a way that maximizes separation of concerns and minimizes dependencies, making the codebase more flexible, understandable, and adaptable to changes.
+
+At its heart, Clean Architecture emphasizes the separation of different concerns and layers within a software system, with the most important and critical business logic at the center, surrounded by layers of increasing abstraction and decreasing stability.
+
+The main layers in Clean Architecture typically include:
+1. **Entities**: These represent the core business objects or concepts. Entities encapsulate the fundamental data and behavior of the application. They are independent of the outer layers and should not contain any dependencies on frameworks or external systems.
+2. **Use Cases (Interactors)**: Use cases contain the application-specific business rules and orchestration logic. They represent the application's use cases or user interactions. Use cases depend on entities and encapsulate the application's core logic.
+3. **Interface Adapters**: These adapt the data from the use cases to the external world. They translate the data between the use cases and the external interfaces, such as controllers, presenters, and views. This layer is responsible for input/output operations, data serialization, and presentation logic.
+4. **Frameworks and Drivers**: This is the outermost layer and contains the external tools, frameworks, and libraries that interact with the application. This layer includes the UI, database, web framework, and other external systems.
+
+The key principles and benefits of Clean Architecture include:
+1. **Independence of Frameworks**: The core business logic is not tied to any specific technology or framework, making it easier to switch or upgrade technologies without affecting the core functionality.
+2. **Testability**: The separation of concerns and the focus on dependency inversion enhance testability, allowing for easy unit testing and better maintainability.
+3. **Flexibility and Adaptability**: Changes in external systems or frameworks have minimal impact on the core business logic, as long as the interfaces remain consistent.
+4. **Maintainability**: The clear separation of layers and concerns leads to code that is easier to understand, maintain, and refactor.
+5. **Decoupling of Components**: Components in different layers are loosely coupled, allowing for independent development, updates, and replacements.
+6. **Human-Centered Design**: Clean Architecture emphasizes human readability and understanding, enabling developers to more easily grasp the system's structure and behavior.
+
+In summary, Clean Architecture encourages structuring software systems with a focus on separation of concerns, testability, and independence from specific technologies. It promotes a modular and maintainable design that aligns well with agile development practices and long-term codebase sustainability.
+
+Let's see how the `UsernamePasswordGenerator` class code aligns with the principles of Clean Architecture:
 * **Layers and Dependencies**: In Clean Architecture, software is organized into layers, with each layer having clear responsibilities and dependencies flowing inward toward the core. While the `UsernamePasswordGenerator` class code is relatively simple and doesn't exhibit all the layers associated with a full application, we can still identify some alignment:
   1. **Entities**: While not explicitly present in this code, in a larger system, entities would represent the core business objects that the application operates on. For instance, user account information could be considered an entity.
   2. **Use Cases/Interactors**: The PasswordGenerator class can be seen as an interactors layer. It encapsulates the core logic of generating usernames and passwords. This layer doesn't depend on external frameworks or libraries and forms the heart of the functionality.
   3. **Interface Adapters**: In Clean Architecture, interface adapters handle the communication between the core and external elements like frameworks, UI, and data storage. In this code, the main method's interaction with the user serves as a simple form of interface adapter. It mediates between the core (username/password generation) and the external input/output.
   4. **Frameworks and Drivers**: This code doesn't include frameworks or drivers in the traditional sense. However, if you were to integrate the `UsernamePasswordGenerator` class into a larger application, the external framework (e.g., Java's standard libraries) would be responsible for handling user input/output.
 * **Dependency Rule**: Clean Architecture promotes the dependency rule, where dependencies should always point inward toward the core of the application. In this code:
-  1. The PasswordGenerator class doesn't have any external dependencies, which aligns with the principle of isolating the core logic.
-  2. The main method depends on PasswordGenerator, representing the direction of dependencies toward the core. The PasswordGenerator class doesn't depend on the main method.
-* **Isolation of Concerns**: The separation of username/password generation from user interaction is a good example of isolating concerns. The PasswordGenerator class focuses on the core logic, while the main method focuses on user interaction. This separation enhances maintainability and makes it easier to modify or replace components independently.
+  1. The `UsernamePasswordGenerator` class doesn't have any external dependencies, which aligns with the principle of isolating the core logic.
+  2. The main method depends on `UsernamePasswordGenerator`, representing the direction of dependencies toward the core. The `UsernamePasswordGenerator` class doesn't depend on the main method.
+* **Isolation of Concerns**: The separation of username/password generation from user interaction is a good example of isolating concerns. The `UsernamePasswordGenerator` class focuses on the core logic, while the main method focuses on user interaction. This separation enhances maintainability and makes it easier to modify or replace components independently.
 
 Overall, while the `UsernamePasswordGenerator` class code is a small example and doesn't encompass the full scope of Clean Architecture, its separation of concerns, isolation of logic, and simple interface adapter (user interaction) demonstrate alignment with the Clean Architecture's principles. In larger applications, these concepts would manifest more extensively across different layers.
 
@@ -285,12 +313,12 @@ Recognizing and addressing these code smells can lead to improved code quality, 
 Let's examine the `UsernamePasswordGenerator` class code for potential code smells:
 1. **Long Method**: The main method includes multiple steps: getting user input, generating the username, generating the password, and printing the results. While the method is not excessively long, it could be split into smaller methods to improve readability and maintainability.
 2. **Lack of Error Handling**: The main method doesn't handle invalid user input. If a user enters non-numeric input for password/username lengths, the code might throw exceptions. Proper error handling using try-catch blocks or input validation would be beneficial.
-3. **Magic Numbers**: The lengths of the username and password (6 and 12) are hardcoded as magic numbers in the main method. It would be better to define these as named constants or receive them as user inputs.
-4. **Missing Constants for Character Sets**: The character sets for password generation (LOWERCASE, UPPERCASE, DIGITS, SPECIAL_CHARACTERS) are hardcoded as strings. It might be more readable and maintainable to define these as constants.
-5. **Limited Username Generation Strategy**: The generateUsername method uses a fixed strategy of generating lowercase usernames of length 6. This approach doesn't consider potential username collisions or alternative strategies for generating usernames.
+3. **Magic Numbers**: The lengths of the username and password (6 and 12) are hard-coded as magic numbers in the main method. It would be better to define these as named constants or receive them as user inputs.
+4. **Missing Constants for Character Sets**: The character sets for password generation (`LOWERCASE`, `UPPERCASE`, `DIGITS`, `SPECIAL_CHARACTERS`) are hard coded as strings. It might be more readable and maintainable to define these as constants.
+5. **Limited Username Generation Strategy**: The `generateUsername` method uses a fixed strategy of generating lowercase usernames of length 6. This approach doesn't consider potential username collisions or alternative strategies for generating usernames.
 6. **Complexity Criteria for Password**: The code doesn't enforce specific complexity criteria for the generated passwords (e.g., requiring at least one uppercase, lowercase, digit, and special character). This might lead to weak passwords in some scenarios.
 7. **Dependency on Console Input/Output**: The main method interacts directly with the console for input and output. In a larger application, it would be more flexible and testable to abstract these interactions through interfaces.
-8. **Limited Randomness Control**: The code uses Java's Random class, which is not cryptographically secure. In security-sensitive applications, a more secure random number generator should be used.
+8. **Limited Randomness Control**: The code uses Java's `Random` class, which is not cryptographically secure. In security-sensitive applications, a more secure random number generator should be used.
 
 Remember that code smells are not always inherently bad, and some are more relevant in larger or more complex codebases. The goal is to identify areas that might need improvement to enhance readability, maintainability, and extensibility. Addressing these potential code smells can lead to a more robust and future-proof `UsernamePasswordGenerator` class.
 
@@ -299,9 +327,9 @@ Remember that code smells are not always inherently bad, and some are more relev
 Design patterns are established solutions to common software design problems that help developers create code that is more modular, reusable, and maintainable. While the `UsernamePasswordGenerator` class code is relatively simple, we can discuss how some design patterns could be applied:
 1. **Factory Method Pattern**: The Factory Method pattern could be used to create instances of the PasswordGenerator class. This pattern would be particularly useful if you want to allow different strategies or implementations for password generation. By defining an interface or abstract class for password generators and implementing concrete factories, you can create different types of password generators without changing client code.
 2. **Strategy Pattern**: The Strategy pattern could be applied to the generation of usernames and passwords. By defining separate strategies for generating usernames and passwords (e.g., random, dictionary-based), you can encapsulate the algorithmic differences in separate classes and switch between them dynamically.
-3. **Builder Pattern**: If the process of building a username or password becomes more complex or requires multiple steps, the Builder pattern could be used. This pattern provides a fluent and flexible way to construct complex objects step by step, abstracting the construction process from the client code.
+3. **Builder Pattern**: If the process of building a username or password becomes more complex or requires multiple steps, the Builder Pattern could be used. This pattern provides a fluent and flexible way to construct complex objects step by step, abstracting the construction process from the client code.
 4. **Decorator Pattern**: In a more advanced version of the `UsernamePasswordGenerator` class, the Decorator pattern could be used to enhance the generated password with additional features or checks. For example, you could decorate the password generator with password complexity checks to ensure that generated passwords meet certain criteria.
-5. **Command Pattern**: If the interaction with the user in the main method becomes more complex, the Command pattern could be applied. You could encapsulate user commands (input and desired actions) into command objects, making the code more flexible and allowing for future extension.
+5. **Command Pattern**: If the interaction with the user in the main method becomes more complex, the Command pattern could be applied. You could encapsulate user commands (input and desired actions) into command objects, making the code more flexible and allowing for future extensions.
 6. **Template Method Pattern**: If the username/password generation involves a common algorithm with varying steps, the Template Method pattern could be used. You would define a template algorithm in the base class and let subclasses override specific steps as needed.
 7. **Observer Pattern**: While not directly applicable in this code, if there are scenarios where changes in the `UsernamePasswordGenerator` class need to be communicated to other parts of the application, the Observer pattern could be used to establish a communication mechanism.
 
@@ -313,7 +341,7 @@ While the `UsernamePasswordGenerator` class code is relatively simple and might 
 3. **Refactoring to Patterns**: As the code evolves and its responsibilities grow, certain design patterns might naturally emerge. Don't force patterns into the code; instead, refactor towards patterns when the codebase starts to show patterns' inherent characteristics.
 4. **Dependency Injection**: While not a design pattern per se, dependency injection can enhance modularity and testability. You could apply this principle by introducing interfaces for random number generation and user interaction, allowing different implementations to be injected as dependencies.
 5. **Patterns as Inspiration**: Even if you don't explicitly use complex design patterns, studying them can provide insights into structuring your code more effectively. The principles behind patterns can guide you in making informed decisions about code organization and responsibilities.
-6. **Potential Evolution**: If the `UsernamePasswordGenerator` class evolves to become part of a larger application, patterns might become more relevant. For instance, as security requirements increase, the Strategy pattern could be applied to support different password generation strategies.
+6. **Potential Evolution**: If the `UsernamePasswordGenerator` class evolves to become part of a larger application, patterns might become more relevant. For instance, as security requirements increase, the Strategy pattern could be applied to support different password-generation strategies.
 7. **Design Patterns Learning Opportunity**: Implementing design patterns in small-scale projects can serve as a valuable learning opportunity. While the immediate benefits might be modest, experimenting with patterns helps you understand their applicability and trade-offs.
 8. **Flexibility for Future Needs**: Design patterns provide flexibility for future changes and additions. As the requirements for the `UsernamePasswordGenerator` class expand, you might find that patterns offer elegant solutions to challenges that emerge.
 
@@ -351,7 +379,7 @@ Remember that ethics is a complex and evolving topic, and ethical considerations
 <a id="future-features"></a>
 ## Program Future Features/Functionality
 Here's a new feature that could be added to the `UsernamePasswordGenerator` class code to enhance its functionality:
-* Password Complexity Customization: Allow users to specify their desired level of password complexity, including options such as requiring a minimum number of uppercase letters, lowercase letters, digits, and special characters. This feature would ensure that the generated passwords meet certain security standards while still being usable and memorable for users. Here's how you could implement this feature:
+* **Password Complexity Customization**: Allow users to specify their desired level of password complexity, including options such as requiring a minimum number of uppercase letters, lowercase letters, digits, and special characters. This feature would ensure that the generated passwords meet certain security standards while still being usable and memorable for users. Here's how you could implement this feature:
   1. Add a method to the PasswordGenerator class that accepts complexity criteria as parameters. For example:
 ```
 public static String generatePasswordWithComplexity(int length, int minUppercase, int minLowercase, int minDigits, int minSpecialChars) {
@@ -359,7 +387,7 @@ public static String generatePasswordWithComplexity(int length, int minUppercase
 }
 ```
   2. Inside the method, you could use a more advanced algorithm to ensure that the generated password meets the specified complexity requirements. This could involve randomly selecting characters from different character sets (uppercase, lowercase, digits, special characters) and then shuffling them to create a password that meets the criteria.
-  3. Update the main method to allow users to specify their desired complexity criteria when generating a password. For example:
+  3. Update the `main` method to allow users to specify their desired complexity criteria when generating a password. For example:
 ```
 int minUppercase = 1;
 int minLowercase = 3;
@@ -372,6 +400,22 @@ String password = PasswordGenerator.generatePasswordWithComplexity(passwordLengt
 2. You could also add error handling to ensure that the sum of complexity criteria doesn't exceed the desired password length.
 
 By adding password complexity customization, you enhance the security aspect of the password generation process while allowing users to generate passwords that align with their specific security needs. This feature would make the `UsernamePasswordGenerator` class more versatile and useful in a broader range of scenarios.
+
+Here's another feature that you could add to the `UsernamePasswordGenerator` class code to further enhance its functionality:
+* **Password Strength Estimation**: Implement a functionality that estimates the strength of the generated passwords based on common password strength criteria. This feature would provide users with feedback on how strong their generated passwords are, helping them make informed decisions about password security.
+
+Here's how you could implement this feature:
+1. Add a method to the PasswordGenerator class that estimates the strength of a given password. You can use common password strength rules, such as the presence of uppercase letters, lowercase letters, digits, and special characters.
+```
+public static PasswordStrength estimatePasswordStrength(String password) {
+    // Implement logic to estimate password strength based on criteria
+}
+```
+1. Define an enum `PasswordStrength` that represents different levels of password strength (e.g., `WEAK`, `MEDIUM`, `STRONG`).
+2. Inside the `estimatePasswordStrength` method, implement the logic to evaluate the given password against the defined criteria and return the corresponding `PasswordStrength` value.
+3. Modify the main method to not only generate passwords but also estimate their strength using the `estimatePasswordStrength` method. Display the estimated password strength to the user.
+
+By adding password strength estimation, you empower users to understand the security level of the passwords they generate. This feature educates users about password security and encourages them to create stronger passwords, ultimately contributing to better overall security practices.
 
 <a id="java-implementation-details"></a>
 ## Java Implementation Details
